@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+*.interp
+*.tokens
+*.x64Lexer.py
+*.x64Listener.py
+*.x64Parser.py
+*.x64Visitor.py
