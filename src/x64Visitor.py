@@ -1,4 +1,4 @@
-# Generated from x64.g4 by ANTLR 4.11.1
+# Generated from x64.g4 by ANTLR 4.8
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .x64Parser import x64Parser
