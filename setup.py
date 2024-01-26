@@ -1,12 +1,9 @@
 import os
-import setuptools
+from setuptools import setup
 from setuptools.command.install import install
 from setuptools.command.develop import develop
 from setuptools.command.egg_info import egg_info
 
-with open(os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                       'README.md')) as f:
-    long_description = f.read()
 
 def custom_command():
     import sys
@@ -32,17 +29,22 @@ class CustomEggInfoCommand(egg_info):
         egg_info.run(self)
 
 
-setuptools.setup(
+setup(
     name='python_x64_parser',
     version='0.0.1',
     author='Floyd Zweydinger',
     author_email='zweydfg8@rub.de',
-    description=('A utility for performing basic text transformations.'),
-    long_description=long_description,
+    description='A utility for performing basic text transformations.',
+    long_description="TODO",
     long_description_content_type='text/markdown',
+    install_requires=["setuptools", ],
     cmdclass={
-        'sdist': sdist
+        'install': install,
+        'develop': develop,
+        'egg_info': egg_info,
     },
+    #package_data={'': ['./']},
+    #requires=[],
     project_urls={
         'Source Code': 'https://github.com/FloydZ/python_x64_parser',
         "Author's Website": 'https://pingfloyd.de',
@@ -61,8 +63,5 @@ setuptools.setup(
         'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3.11',
         'Topic :: Utilities',
-    ],
-    packages=[
-        'src',
     ],
 )

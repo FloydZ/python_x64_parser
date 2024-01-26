@@ -1,3 +1,6 @@
+build/
+_build/
+*egg-info/
 .idea/
 # Byte-compiled / optimized / DLL files
 __pycache__/

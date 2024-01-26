@@ -14,9 +14,10 @@ mach-nix.nixpkgs.mkShell {
   buildInputs = [
     wget
     virtualenv
-	antlr4_8
+	antlr4
     pyEnv
-	python3Packages.antlr4-python3-runtime
+    python3Packages.antlr4-python3-runtime
+    gnumake
   ];
   venvDir = "venv3";
 
@@ -28,7 +29,7 @@ mach-nix.nixpkgs.mkShell {
     export PYTHONPATH="$PIP_PREFIX/${pkgs.python3.sitePackages}:$PYTHONPATH"
     export PATH="$PIP_PREFIX/bin:$PATH"
     unset SOURCE_DATE_EPOCH
-    sh setup.sh
+    sh build.sh
   '';
 
    postShellHook = ''
