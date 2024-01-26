@@ -1,31 +1,42 @@
 import os
 import setuptools
-from distutils.command.sdist import sdist as sdist_orig
-from distutils.errors import DistutilsExecError
-
+from setuptools.command.install import install
+from setuptools.command.develop import develop
+from setuptools.command.egg_info import egg_info
 
 with open(os.path.join(os.path.dirname(os.path.realpath(__file__)),
                        'README.md')) as f:
     long_description = f.read()
 
+def custom_command():
+    import sys
+    if sys.platform in ['linux']:
+        os.system('./build.sh')
 
-class sdist(sdist_orig):
-    """
-    runs a simple shell script to setup everything
-    """
+
+class CustomInstallCommand(install):
     def run(self):
-        try:
-            self.spawn(['./setup.sh'])
-        except DistutilsExecError:
-            self.warn('failed to run the setup script')
-        super().run()
+        custom_command()
+        install.run(self)
+
+
+class CustomDevelopCommand(develop):
+    def run(self):
+        custom_command()
+        develop.run(self)
+
+
+class CustomEggInfoCommand(egg_info):
+    def run(self):
+        custom_command()
+        egg_info.run(self)
 
 
 setuptools.setup(
     name='python_x64_parser',
     version='0.0.1',
     author='Floyd Zweydinger',
-    author_email='floyd.zweydinger',
+    author_email='zweydfg8@rub.de',
     description=('A utility for performing basic text transformations.'),
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -54,9 +65,4 @@ setuptools.setup(
     packages=[
         'src',
     ],
-    # entry_points={
-    #     'console_scripts': [
-    #         'python_x64_parser=src.python_x64_parser:cli',
-    #     ],
-    # },
 )
