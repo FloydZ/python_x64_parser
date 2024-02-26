@@ -1,4 +1,5 @@
-#! /usr/bin/python3
+#!/usr/bin/python3
+""" some tests """
 import sys
 from antlr4 import *
 from antlr4.tree import Trees
